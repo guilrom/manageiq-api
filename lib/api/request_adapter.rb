@@ -87,6 +87,10 @@ module Api
       @href ||= Href.new(url)
     end
 
+    def self.kerberos_path?(request)
+      URI.parse(request.original_url).path.match(%r{^/kerberos/})
+    end
+
     def resources
       if json_body.key?("resources")
         json_body["resources"]
