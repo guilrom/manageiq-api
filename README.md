@@ -12,6 +12,10 @@ the public REST API for ManageIQ.
 
 [![Chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ManageIQ/api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+## Fork project
+
+This fork of the official ManageIQ::Api plugin aimes at adding support for /kerberos/api/auth token generation for Kerberos user authentication. It is based on this PR https://github.com/ManageIQ/manageiq/pull/14959/files by Abellotti
+
 ## Contributing
 
 ### Prerequisites

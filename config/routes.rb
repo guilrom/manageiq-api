@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     root :to => "api#index", :as => :entrypoint
     match "/", :to => "api#options", :via => :options
 
+    # Support Kerberos user authentication for /api/auth
+    match "/kerberos/api/auth", :to => "api/auth#show", :via => :get
+
     get "/ping" => "ping#index"
     get "/product_info" => "api#product_info"
 
