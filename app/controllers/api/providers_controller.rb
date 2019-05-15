@@ -87,7 +87,21 @@ module Api
       providers_options = ManageIQ::Providers::BaseManager.leaf_subclasses.inject({}) do |po, ems|
         po.merge(ems.ems_type => ems.options_description)
       end
-      render_options(:providers, "provider_settings" => providers_options)
+
+      supported_providers = ExtManagementSystem.supported_types_for_create.map do |klass|
+        if klass.supports_regions?
+          regions = klass.parent::Regions.all.sort_by { |r| r[:description] }.map { |r| r.slice(:name, :description) }
+        end
+
+        {
+          :title   => klass.description,
+          :type    => klass.to_s,
+          :kind    => klass.to_s.demodulize.sub(/Manager$/, '').underscore,
+          :regions => regions
+        }.compact
+      end
+
+      render_options(:providers, "provider_settings" => providers_options, "supported_providers" => supported_providers)
     end
 
     def pause_resource(type, id, _data)
