@@ -32,9 +32,9 @@ module Api
     end
 
     # @return [String] the path portion of the href
-    # (removing '/kerberos' occurence in the path if present)
+    # (removing '/sso' occurence in the path if present)
     def path
-      @path ||= remove_trailing_slashes(fully_qualified? ? URI.parse(href).path : ensure_prefix(href)).sub(%r{^/kerberos/}, '/') # /api/...
+      @path ||= remove_trailing_slashes(fully_qualified? ? URI.parse(href).path : ensure_prefix(href)).sub(%r{^/api/sso/}, '/api/') # /api/...
     end
 
     # @return [String, nil] the name of the collection if there is
@@ -100,7 +100,7 @@ module Api
     def ensure_prefix(str)
       result = str.dup
       result.prepend("/")     unless result.start_with?("/")
-      result.prepend("/api")  unless (result.start_with?("/api") || result.start_with?("/kerberos/api"))
+      result.prepend("/api")  unless (result.start_with?("/api")
       result
     end
 

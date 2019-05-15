@@ -87,8 +87,8 @@ module Api
       @href ||= Href.new(url)
     end
 
-    def self.kerberos_path?(request)
-      URI.parse(request.original_url).path.match(%r{^/kerberos/})
+    def self.sso_path?(request)
+      URI.parse(request.original_url).path.match(%r{^/api/sso/})
     end
 
     def resources

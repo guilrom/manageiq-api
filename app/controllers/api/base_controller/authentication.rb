@@ -8,7 +8,7 @@ module Api
           :system
         elsif request.headers[HttpHeaders::AUTH_TOKEN]
           :token
-        elsif RequestAdapter.kerberos_path?(request)
+        elsif RequestAdapter.sso_path?(request)
           :sso
         elsif request.headers["HTTP_AUTHORIZATION"]
           :basic
