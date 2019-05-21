@@ -100,7 +100,7 @@ module Api
     def ensure_prefix(str)
       result = str.dup
       result.prepend("/")     unless result.start_with?("/")
-      result.prepend("/api")  unless (result.start_with?("/api")
+      result.prepend("/api")  unless result.start_with?("/api")
       result
     end
 
