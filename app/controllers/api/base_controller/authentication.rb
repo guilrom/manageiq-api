@@ -28,7 +28,7 @@ module Api
         when :token
           authenticate_with_user_token(request.headers[HttpHeaders::AUTH_TOKEN])
         when :sso
-          user_name = request.headers["X-Remote-User"].present? ? request.headers["X-Remote-User"].split("@").first : ""
+          user_name = request.headers["X-REMOTE-USER"].present? ? request.headers["X-REMOTE-USER"].split("@").first : ""
           timeout = ::Settings.api.authentication_timeout.to_i_with_method
           user = User.authenticate(user_name, "", request, :require_user => true, :timeout => timeout)
           auth_user(user.userid)
