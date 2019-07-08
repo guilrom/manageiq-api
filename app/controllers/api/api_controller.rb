@@ -93,6 +93,7 @@ module Api
         :saml_enabled         => ext_auth?(:saml_enabled),
         :sso_enabled         => ext_auth?(:sso_enabled)
       }
+    end
 
     def ext_auth?(auth_option = nil)
       return false unless Settings.authentication.mode == 'httpd'
