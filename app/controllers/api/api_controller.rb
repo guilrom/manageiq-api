@@ -81,8 +81,22 @@ module Api
         :copyright            => I18n.t("product.copyright"),
         :support_website      => I18n.t("product.support_website"),
         :support_website_text => I18n.t("product.support_website_text"),
-        :branding_info        => branding_info
+        :branding_info        => branding_info,
+        :auth_mode            => auth_mode
       }
+    end
+
+    def auth_mode
+      {
+        :mode                 => Settings.authentication.mode,
+        :oidc_enabled         => ext_auth?(:oidc_enabled),
+        :saml_enabled         => ext_auth?(:saml_enabled),
+        :sso_enabled         => ext_auth?(:sso_enabled)
+      }
+
+    def ext_auth?(auth_option = nil)
+      return false unless Settings.authentication.mode == 'httpd'
+      auth_option ? Settings.authentication[auth_option] : true
     end
 
     def image_path(image)
