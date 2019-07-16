@@ -395,6 +395,12 @@
         :identifier: ops_settings
       - :name: delete
         :identifier: ops_settings
+  :cdroms:
+    :description: CD-ROMs
+    :options:
+    - :subcollection
+    :verbs: *g
+    :klass: Disk
   :chargebacks:
     :description: Chargebacks
     :identifier: chargeback
@@ -1144,6 +1150,12 @@
         :identifier: storage_tag
       - :name: unassign
         :identifier: storage_tag
+  :disks:
+    :description: Disks
+    :options:
+    - :subcollection
+    :verbs: *g
+    :klass: Disk
   :enterprises:
     :description: Enterprises
     :options:
@@ -1213,6 +1225,16 @@
       :post:
       - :name: assign
       - :name: unassign
+  :firmware_binaries:
+    :description: Firmware Binaries
+    :options:
+    - :subcollection
+    :verbs: *g
+    :klass: FirmwareBinary
+    :subcollection_actions:
+      :get:
+      - :name: read
+        :identifier: firmware
   :firmwares:
     :description: Firmwares
     :options:
@@ -1232,6 +1254,7 @@
       :get:
       - :name: read
         :identifier: firmware_show
+
   :flavors:
     :description: Flavors
     :identifier: flavor
@@ -1919,6 +1942,7 @@
     :klass: PhysicalServer
     :subcollections:
     - :event_streams
+    - :firmware_binaries
     :collection_actions:
       :get:
       - :name: read
@@ -2381,16 +2405,53 @@
       :get:
       - :name: read
         :identifier: pxe_server_view
+  :pxe_menus:
+    :description: PXE Menus
+    :identifier: pxe_server_accord
+    :options:
+    - :collection
+    :verbs: *gpppd
+    :klass: PxeMenu
+    :collection_actions:
+      :get:
+      - :name: read
+        :identifier: pxe_server_view
+      :post:
+      - :name: create
+        :identifier: pxe_server_create
+    :subresource_actions:
+      :get:
+      - :name: read
+        :identifier: pxe_server_view
+    :subcollection_actions:
+      :get:
+      - :name: read
+        :identifier: pxe_server_view
+      :post:
+      - :name: create
+        :identifier: pxe_server_create
   :pxe_servers:
     :description: PXE Servers
     :identifier: pxe_server_accord
     :options:
     - :collection
-    :verbs: *g
+    :verbs: *gpppd
     :klass: PxeServer
     :subcollections:
     - :pxe_images
+    - :pxe_menus
     :collection_actions:
+      :post:
+      - :name: create
+        :identifier: pxe_server_create
+      - :name: edit
+        :identifier: pxe_server_edit
+      :patch:
+      - :name: edit
+        :identifier: pxe_server_edit
+      :delete:
+      - :name: delete
+        :identifier: pxe_server_delete
       :get:
       - :name: read
         :identifier: pxe_server_view
@@ -2398,6 +2459,17 @@
       :get:
       - :name: read
         :identifier: pxe_server_view
+      :patch:
+      - :name: edit
+        :identifier: pxe_server_edit
+      :post:
+      - :name: create
+        :identifier: pxe_server_create
+      - :name: edit
+        :identifier: pxe_server_edit
+      :delete:
+      - :name: delete
+        :identifier: pxe_server_delete
   :quotas:
     :description: TenantQuotas
     :options:
@@ -2571,6 +2643,8 @@
           :identifier: configured_system_provision
         - :klass: VmReconfigureRequest
           :identifier: vm_reconfigure
+        - :klass: VmCloudReconfigureRequest
+          :identifier: vm_cloud_reconfigure
         - :klass: VmMigrateRequest
           :identifier: vm_migrate
         - :klass: ServiceTemplateProvisionRequest
@@ -2585,6 +2659,8 @@
           :identifier: vm_retire
         - :klass: PhysicalServerProvisionRequest
           :identifier: physical_server_provision
+        - :klass: PhysicalServerFirmwareUpdateRequest
+          :identifier: firmware
       - :name: edit
         :identifier: miq_request_edit
       - :name: approve
@@ -2884,6 +2960,8 @@
         :identifier: dialog_edit_editor
       - :name: copy
         :identifier: dialog_copy_editor
+      - :name: orchestration_template_service_dialog
+        :identifier: dialog_new_editor
     :resource_actions:
       :get:
       - :name: read
@@ -2899,6 +2977,8 @@
         :identifier: dialog_edit_editor
       - :name: copy
         :identifier: dialog_copy_editor
+      - :name: orchestration_template_service_dialog
+        :identifier: dialog_new_editor
       :delete:
       - :name: delete
         :identifier: dialog_delete
@@ -3234,12 +3314,12 @@
         - sui_services_edit
       - :name: retire
         :identifier:
-        - service_retire
+        - service_retire_now
         - sui_services_retire
       - :name: request_retire
         :identifier:
-        - service_retire
-        - sui_services_retire_date
+        - service_retire_now
+        - sui_services_retire
       - :name: set_ownership
         :identifier:
         - service_ownership
@@ -3741,6 +3821,8 @@
     :verbs: *gpd
     :klass: Vm
     :subcollections:
+    - :cdroms
+    - :disks
     - :tags
     - :policies
     - :policy_profiles
@@ -3892,6 +3974,26 @@
       :delete:
       - :name: delete
         :identifier: vm_delete
+    :disks_subcollection_actions:
+      :get:
+      - :name: read
+        :identifier:
+        - vm_show
+    :cdroms_subcollection_actions:
+      :get:
+      - :name: read
+        :identifier:
+        - vm_show
+    :disks_subresource_actions:
+      :get:
+      - :name: read
+        :identifier:
+        - vm_show
+    :cdroms_subresource_actions:
+      :get:
+      - :name: read
+        :identifier:
+        - vm_show
     :tags_subcollection_actions:
       :post:
       - :name: assign

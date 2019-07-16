@@ -219,6 +219,7 @@ RSpec.describe "Requests API" do
     it "succeed immediately with optional data and auto_approve set to true" do
       api_basic_authorize :service_reconfigure
 
+      FactoryBot.create(:user_admin, :userid => 'admin')
       approver = FactoryBot.create(:user_miq_request_approver)
       service = FactoryBot.create(:service, :name => "service1")
       post(api_requests_url, :params => gen_request(:create,
@@ -258,7 +259,7 @@ RSpec.describe "Requests API" do
 
       FactoryBot.create(:classification_department_with_tags)
 
-      t = Classification.where(:description => 'Department', :parent_id => 0).includes(:tag).first
+      t = Classification.is_category.includes(:tag).find_by(:description => 'Department')
       request.add_tag(t.name, t.children.first.name)
 
       api_basic_authorize action_identifier(:requests, :read, :resource_actions, :get)
@@ -289,7 +290,7 @@ RSpec.describe "Requests API" do
 
       FactoryBot.create(:classification_department_with_tags)
 
-      t = Classification.where(:description => 'Department', :parent_id => 0).includes(:tag).first
+      t = Classification.is_category.includes(:tag).find_by(:description => 'Department')
       request.add_tag(t.name, t.children.first.name)
 
       api_basic_authorize action_identifier(:requests, :read, :resource_actions, :get)

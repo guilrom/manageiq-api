@@ -5,6 +5,40 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 115 ending 2019-07-08
+
+### Added
+- Allow api.yml to be pluggable [(#613)](https://github.com/ManageIQ/manageiq-api/pull/613)
+- Added PxeServer create update and delete actions [(#594)](https://github.com/ManageIQ/manageiq-api/pull/594)
+
+## Hammer-8 - Released 2019-07-02
+
+### Added
+- Adjust ConversionHost support check so that it uses resource instead of singleton [(#600)](https://github.com/ManageIQ/manageiq-api/pull/600)
+
+## Unreleased as of Sprint 114 ending 2019-06-24
+
+### Added
+- Add a subcollection under VMs for displaying CD-ROMs [(#605)](https://github.com/ManageIQ/manageiq-api/pull/605)
+- Add a subcollection under VMs for displaying disks [(#598)](https://github.com/ManageIQ/manageiq-api/pull/598)
+
+### Fixed
+- Allow reconfigure vm on OSP provider over Centralized Administration [(#608)](https://github.com/ManageIQ/manageiq-api/pull/608)
+
+## Hammer-6 - Released 2019-05-22
+
+### Added
+- Add ability to enable and disable conversion hosts [(#535)](https://github.com/ManageIQ/manageiq-api/pull/535)
+
+### Fixed
+- Fixes conversion_hosts_spec.rb failures [(#524)](https://github.com/ManageIQ/manageiq-api/pull/524)
+
+## Unreleased as of Sprint 111 ending 2019-05-13
+
+### Added
+- Include the regions if they're supported with OPTIONS /api/providers [(#581)](https://github.com/ManageIQ/manageiq-api/pull/581)
+- Support physical server provisioning [(#578)](https://github.com/ManageIQ/manageiq-api/pull/578)
+
 ## Unreleased as of Sprint 110 ending 2019-04-29
 
 ### Added
@@ -25,11 +59,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ### Fixed
 - Remove SQL select from exception error messages. [(#537)](https://github.com/ManageIQ/manageiq-api/pull/537)
-
-## Unreleased as of Sprint 106 ending 2019-03-04
-
-### Added
-- Add ability to enable and disable conversion hosts [(#535)](https://github.com/ManageIQ/manageiq-api/pull/535)
 
 ## Hammer-3 - Released 2019-03-06
 
