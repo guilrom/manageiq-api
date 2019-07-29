@@ -74,6 +74,7 @@ module Api
       }
     end
 
+    # @note : auth_mode is added here as a temp way to access auth mode anonymously from UI app
     def product_info_data
       {
         :name                 => Vmdb::Appliance.PRODUCT_NAME,

@@ -14,7 +14,7 @@ the public REST API for ManageIQ.
 
 ## Forked project
 
-This fork of the official ManageIQ::Api plugin aimes at adding support for /api/sso/auth token generation for SSO (Kerberos, SAML, OIDC) user authentication. It is based on this PR https://github.com/ManageIQ/manageiq/pull/14959/files by Abellotti.
+This fork of the official ManageIQ::Api plugin aimes at adding support for /api/sso/auth token generation for SSO (SAML, OIDC) user authentication. It is based on this PR https://github.com/ManageIQ/manageiq/pull/14959/files by Abellotti.
 
 ## Contributing
 

@@ -22,21 +22,17 @@ module Api
       # REST APIs Authenticator and Redirector
       #
       def require_api_user_or_token
-        api_log_info("require_api_user_or_token > auth_mechanism: #{auth_mechanism}")
         case auth_mechanism
         when :system
           authenticate_with_system_token(request.headers[HttpHeaders::MIQ_TOKEN])
         when :token
           authenticate_with_user_token(request.headers[HttpHeaders::AUTH_TOKEN])
         when :sso
-          if request.headers[HttpHeaders::AUTH_TOKEN] # if already authenticated, authenticate with existing token
-            authenticate_with_user_token(request.headers[HttpHeaders::AUTH_TOKEN])
-          else # use specific sso headers
-            user_name = request.headers["X-REMOTE-USER"].present? ? request.headers["X-REMOTE-USER"].split("@").first : ""
-            timeout = ::Settings.api.authentication_timeout.to_i_with_method
-            user = User.authenticate(user_name, "", request, :require_user => true, :timeout => timeout)
-            auth_user(user.userid)
-          end
+          # use specific sso headers
+          user_name = request.headers["X-REMOTE-USER"].present? ? request.headers["X-REMOTE-USER"].split("@").first : ""
+          timeout = ::Settings.api.authentication_timeout.to_i_with_method
+          user = User.authenticate(user_name, "", request, :require_user => true, :timeout => timeout)
+          auth_user(user.userid)
         when :basic, nil
           success = authenticate_with_http_basic do |u, p|
             begin
@@ -93,7 +89,6 @@ module Api
       end
 
       def auth_user(userid)
-        api_log_info("Entering in auth_user")
         auth_user_obj = User.lookup_by_identity(userid)
         authorize_user_group(auth_user_obj)
         validate_user_identity(auth_user_obj)
@@ -101,7 +96,6 @@ module Api
       end
 
       def authenticate_with_user_token(auth_token)
-        api_log_info("Entering in authenticate_with_user_token")
         if !api_token_mgr.token_valid?(auth_token)
           raise AuthenticationError, "Invalid Authentication Token #{auth_token} specified"
         else
