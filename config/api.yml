@@ -2960,7 +2960,7 @@
         :identifier: dialog_edit_editor
       - :name: copy
         :identifier: dialog_copy_editor
-      - :name: orchestration_template_service_dialog
+      - :name: template_service_dialog
         :identifier: dialog_new_editor
     :resource_actions:
       :get:
@@ -2977,7 +2977,7 @@
         :identifier: dialog_edit_editor
       - :name: copy
         :identifier: dialog_copy_editor
-      - :name: orchestration_template_service_dialog
+      - :name: template_service_dialog
         :identifier: dialog_new_editor
       :delete:
       - :name: delete
@@ -3661,6 +3661,17 @@
         :identifier: miq_template_protect
       - :name: resolve
         :identifier: miq_template_policy_sim
+  :tenant_groups:
+    :description: Tenant Groups
+    :identifier: rbac_group
+    :options:
+    - :collection
+    :verbs: *g
+    :klass: MiqGroup
+    :collection_actions:
+      :get:
+      - :name: read
+        :identifier: rbac_group_show_list
   :tenants:
     :description: Tenants
     :identifier: rbac_tenant
@@ -3878,8 +3889,8 @@
         :identifier: vm_pause
       - :name: request_console
         :identifier:
-        - vm_console
-        - sui_vm_console
+        - vm_html5_console
+        - sui_vm_html5_console
         - sui_vm_web_console
       - :name: reset
         :identifier: vm_reset
@@ -3948,8 +3959,8 @@
         :identifier: vm_pause
       - :name: request_console
         :identifier:
-        - vm_console
-        - sui_vm_console
+        - vm_html5_console
+        - sui_vm_html5_console
         - sui_vm_web_console
       - :name: reset
         :identifier: vm_reset
